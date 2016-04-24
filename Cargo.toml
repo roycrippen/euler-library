@@ -1,0 +1,6 @@
+[package]
+name = "eu_lib"
+version = "0.1.0"
+authors = ["roycrippen <roycrippen@gmail.com>"]
+
+[dependencies]
