@@ -8,7 +8,7 @@
 //! # Examples
 //!
 //! ```
-//! use eu_lib::common as eu;
+//! use euler_library::common as eu;
 //!
 //! assert!(eu::is_palindrome(12321));
 //! assert_eq!(eu::divisor_sum_list(10), [0, 0, 1, 1, 3, 1, 6, 1, 7, 4, 8]);
@@ -27,7 +27,7 @@ use std::iter::{Repeat, Take};
 /// Returns the sum of the proper divisors of n (not including n).
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::divisor_sum(10), 8);
 /// ```
@@ -52,7 +52,7 @@ pub fn divisor_sum(n: usize) -> usize {
 /// Returns a vector containing divisor_sum(i) for i from 0 to n.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::divisor_sum_list(10), [0, 0, 1, 1, 3, 1, 6, 1, 7, 4, 8]);
 /// assert_eq!(*eu::divisor_sum_list(10).last().unwrap(), eu::divisor_sum(10));
@@ -76,7 +76,7 @@ pub fn divisor_sum_list(limit: usize) -> Vec<usize> {
 /// This function checks if pandigital from start to n exactly once.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert!(eu::is_pandigital("456123".to_string(), 1));
 /// assert!(eu::is_pandigital("4560123".to_string(), 0));
@@ -97,7 +97,7 @@ pub fn is_pandigital(string: String, start: usize) -> bool {
 /// Panics if string s can not be cast as usize.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::sum_of_digits("123".to_string()), 6);
 /// ```
@@ -108,7 +108,7 @@ pub fn sum_of_digits(s: String) -> usize {
 /// Returns n as a vector of bytes.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::to_bytes(123), [49, 50, 51]);
 /// ```
@@ -118,7 +118,7 @@ pub fn to_bytes<T: ToString>(n: T) -> Vec<u8> { n.to_string().into_bytes() }
 /// Returns Result from attempting to parses a Vec of u8.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::from_bytes::<usize>(&[51, 50, 49]), Ok(321 as usize));
 ///
@@ -135,7 +135,7 @@ pub fn from_bytes<T>(vec: &[u8]) -> Result<T, T::Err>
 /// Returns usize n as a vector of its usize digits.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::to_digits(123), [1, 2, 3]);
 /// ```
@@ -161,7 +161,7 @@ pub fn from_digits(xs: &[usize]) -> usize {
 /// Returns true if value v is a palindrome (reads the same backward or forward).
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert!(eu::is_palindrome(12321));
 /// assert!(eu::is_palindrome("abcba"));
@@ -183,7 +183,7 @@ pub fn is_palindrome<T: ToString>(n: T) -> bool {
 /// Panics for n above 20.  Big factorial implemented in eu_big crate.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::factorial(15), 1307674368000);
 ///
@@ -195,7 +195,7 @@ pub fn factorial(n: usize) -> usize { (1..n + 1).fold(1, |p, n| p * n) }
 /// Iterative solution.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::perms_with_reps(2, &vec![1,2]), [[1,1], [1,2], [2,1], [2,2]]);
 ///
@@ -219,7 +219,7 @@ pub fn replicate<T>(n: usize, elt: T) -> Take<Repeat<T>>
 /// Recursive solution.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// let xss = vec![vec![1, 2], vec![3, 4]];
 /// assert_eq!(eu::cartesian_product(&xss), [[1, 3], [1, 4], [2, 3], [2, 4]]);
@@ -279,7 +279,7 @@ pub fn push<T>(xs: &Vec<T>, y: T) -> Vec<T>
 /// Recursive solution.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::perms_without_reps_recur(2, &[1,2]), [[1,2], [2,1]]);
 ///
@@ -316,7 +316,7 @@ pub fn perms_without_reps_recur<T>(k: usize, xs: &[T]) -> Vec<Vec<T>>
 /// Recursive solution.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// let res = [[1,1,1], [1,1,2], [1,2,1], [1,2,2], [2,1,1], [2,1,2], [2,2,1], [2,2,2]];
 /// assert_eq!(eu::k_nested_recur(3, &[1,2]), res);
@@ -353,7 +353,7 @@ pub fn k_nested_recur<T>(k: usize, xs: &[T]) -> Vec<Vec<T>>
 /// Form: (a0, [t1, t2..., tn]), see https://projecteuler.net/problem=64
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::sqrt_terms(13), Some((3, vec![1, 1, 1, 1, 6])));
 /// assert_eq!(eu::sqrt_terms(25), None);
@@ -382,7 +382,7 @@ pub fn sqrt_terms(n: usize) -> Option<(usize, Vec<usize>)> {
 /// Form of continued fraction: (a0, [t1, t2, t3, ....])
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// let root_13 = eu::sqrt_terms(13);
 ///
@@ -414,7 +414,7 @@ pub fn continued_fraction(a0: usize, mut xs: Vec<usize>) -> (usize, usize) {
 /// Returns true if a and b are permutations of each other.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert!(eu::is_perm(123,231));
 /// assert!(eu::is_perm("yes","esy"));
@@ -433,7 +433,7 @@ pub fn is_perm<T: ToString>(a: T, b: T) -> bool {
 /// given number n that are relatively prime to n.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// let phi_90_to_100 = eu::phis(100).into_iter().skip(90).collect::<Vec<_>>();
 ///
@@ -470,7 +470,7 @@ pub fn phis(d: usize) -> Vec<usize> {
 /// Returns vector of the running total of xs.
 ///
 /// ```
-/// use eu_lib::common as eu;
+/// use euler_library::common as eu;
 ///
 /// assert_eq!(eu::accumulate(&[1,2,3,4]), [1,3,6,10]);
 /// assert_eq!(eu::accumulate(&[1,1,1,1,1]), [1,2,3,4,5]);

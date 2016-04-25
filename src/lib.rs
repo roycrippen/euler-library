@@ -6,12 +6,12 @@
 //!
 //! ```toml
 //! [dependencies]
-//! eu_lib = { path = "your/path/to/eu_lib" }
+//! euler_library = { git = "https://github.com/roycrippen/euler_library" }
 //! ```
 //! And add this to your root crate.
 //!
 //! ```
-//! extern crate eu_lib;
+//! extern crate euler_library;
 //! ```
 //!
 pub mod cards;
