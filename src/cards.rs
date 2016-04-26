@@ -2,6 +2,25 @@
 //
 // #![plugin(clippy)]
 
+//! Playing card library for poker to rank hands.
+//!
+//!
+//! # Examples
+//!
+//! ```
+//! use euler_library::cards as cards;
+//!
+//! let hand_cs = "AD AS JH JS 2C".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
+//! let hand_loser = cards::get_hand(5, hand_cs);
+//! assert_eq!(hand_loser.show(), "[(Two, Clubs), (Jack, Spades), (Jack, Hearts), (Ace, Spades), (Ace, Diamonds)]");
+//!
+//! let hand_cs = "3D 3H 3C 2S 2D".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
+//! let hand_winner = cards::get_hand(5, hand_cs);
+//! assert_eq!(hand_winner.show(), "[(Two, Diamonds), (Two, Spades), (Three, Clubs), (Three, Hearts), (Three, Diamonds)]");
+//!
+//! assert!(hand_winner.get_rank() > hand_loser.get_rank());
+//! ```
+
 use self::Val::*;
 use self::Suit::*;
 
@@ -26,8 +45,8 @@ impl fmt::Display for Card {
 }
 
 impl Card {
-    pub fn same_suit(&self, other: Card) -> bool { self.suit == other.suit }
-    pub fn next_val(&self) -> Val {
+    // fn same_suit(&self, other: Card) -> bool { self.suit == other.suit }
+    fn next_val(&self) -> Val {
         match self.val {
             Ace => Two,
             Two => Three,
@@ -52,6 +71,15 @@ pub struct Hand {
 }
 
 impl Hand {
+    /// Return a String representation of hand.
+    ///
+    /// ```
+    /// use euler_library::cards as cards;
+    ///
+    /// let hand_cs = "AD AS JH JS 2C".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
+    /// let hand = cards::get_hand(5, hand_cs);
+    /// assert_eq!(hand.show(), "[(Two, Clubs), (Jack, Spades), (Jack, Hearts), (Ace, Spades), (Ace, Diamonds)]");
+    /// ```
     pub fn show(&self) -> String {
         let mut str = "[".to_string();
         for x in self.cards.iter() {
@@ -62,11 +90,11 @@ impl Hand {
         str = str + &"]";
         str
     }
-    pub fn is_flush(&self) -> bool {
+    fn is_flush(&self) -> bool {
         let first = self.cards[0].suit;
         self.cards.iter().skip(1).all(|x| x.suit == first)
     }
-    pub fn is_straight(&self) -> bool {
+    fn is_straight(&self) -> bool {
         let mut card = self.cards.clone();
 
         // handle Ace low straight
@@ -86,13 +114,13 @@ impl Hand {
         }
         true
     }
-    pub fn is_straight_flush(&self) -> bool {
+    fn is_straight_flush(&self) -> bool {
         if !self.is_flush() {
             return false;
         }
         self.is_straight()
     }
-    pub fn is_3_of_kind(&self, gss: &[Hand]) -> bool {
+    fn is_3_of_kind(&self, gss: &[Hand]) -> bool {
         for gs in gss {
             if gs.cards.len() == 3 {
                 return true;
@@ -100,7 +128,7 @@ impl Hand {
         }
         false
     }
-    pub fn is_4_of_kind(&self, gss: &[Hand]) -> bool {
+    fn is_4_of_kind(&self, gss: &[Hand]) -> bool {
         for gs in gss {
             if gs.cards.len() == 4 {
                 return true;
@@ -108,7 +136,7 @@ impl Hand {
         }
         false
     }
-    pub fn is_pair(&self, gss: &[Hand]) -> bool {
+    fn is_pair(&self, gss: &[Hand]) -> bool {
         for gs in gss {
             if gs.cards.len() == 2 {
                 return true;
@@ -116,7 +144,7 @@ impl Hand {
         }
         false
     }
-    pub fn is_2_pair(&self, gss: &[Hand]) -> bool {
+    fn is_2_pair(&self, gss: &[Hand]) -> bool {
         let mut p1 = false;
         let mut p2 = false;
 
@@ -134,19 +162,19 @@ impl Hand {
         }
         true
     }
-    pub fn is_full_house(&self, gss: &[Hand]) -> bool {
+    fn is_full_house(&self, gss: &[Hand]) -> bool {
         if !self.is_pair(gss) {
             return false;
         }
         self.is_3_of_kind(gss)
     }
-    pub fn is_high_card(&self, gss: &[Hand]) -> bool {
+    fn is_high_card(&self, gss: &[Hand]) -> bool {
         if gss.len() == 5 {
             return true;
         }
         false
     }
-    pub fn group(&self) -> Vec<Hand> {
+    fn group(&self) -> Vec<Hand> {
         let mut sorted = self.cards.clone();
         sorted.sort();
         let mut res: Vec<Hand> = Vec::new();
@@ -197,7 +225,7 @@ impl Hand {
         }
         rank
     }
-    pub fn value_high_card(&self) -> usize {
+    fn value_high_card(&self) -> usize {
         let mut mult = 1;
         let mut res = 0;
         for v in &self.cards {
@@ -206,7 +234,7 @@ impl Hand {
         }
         res
     }
-    pub fn value_pair(&self, gss: &[Hand]) -> usize {
+    fn value_pair(&self, gss: &[Hand]) -> usize {
         let mut mult = 1;
         let mut res = 0;
         let mut pair = 0;
@@ -224,7 +252,7 @@ impl Hand {
         }
         res
     }
-    pub fn value_2_pair(&self, gss: &[Hand]) -> usize {
+    fn value_2_pair(&self, gss: &[Hand]) -> usize {
         let mut res = 0;
         let mut pair1 = 0;
         let mut pair2 = 0;
@@ -248,6 +276,21 @@ impl Hand {
     }
 }
 
+/// Returns a new line seperated String of hands for printing.
+///
+/// ```
+/// use euler_library::cards as cards;
+///
+/// let hand_cs = "AD AS JH JS 2C".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
+/// let hand_loser = cards::get_hand(5, hand_cs);
+///
+/// let hand_cs = "3D 3H 3C 2S 2D".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
+/// let hand_winner = cards::get_hand(5, hand_cs);
+///
+/// assert_eq!(cards::show_grp(vec![hand_loser, hand_winner]),
+///        "[(Two, Clubs), (Jack, Spades), (Jack, Hearts), (Ace, Spades), (Ace, Diamonds)]\n[(Two, Diamonds), (Two, Spades), (Three, Clubs), (Three, Hearts), (Three, Diamonds)]\n");
+///
+/// ```
 pub fn show_grp(gss: Vec<Hand>) -> String {
     let mut str = "".to_string();
     for gs in gss {
@@ -256,6 +299,16 @@ pub fn show_grp(gss: Vec<Hand>) -> String {
     str
 }
 
+/// Returns Suit enum from a character.
+///
+/// Panics if character is invalid.
+///
+/// ```
+/// use euler_library::cards as cards;
+///
+/// assert_eq!(cards::char_to_suit('H'), cards::Suit::Hearts);
+///
+/// ```
 pub fn char_to_suit(c: char) -> Suit {
     match c {
         'S' => Spades,
@@ -266,6 +319,17 @@ pub fn char_to_suit(c: char) -> Suit {
     }
 }
 
+/// Returns card face Val enum from a character.
+///
+/// Panics if character is invalid.
+///
+/// ```
+/// use euler_library::cards as cards;
+///
+/// assert_eq!(cards::char_to_val('A'), cards::Val::Ace);
+/// assert_eq!(cards::char_to_val('9'), cards::Val::Nine);
+///
+/// ```
 pub fn char_to_val(c: char) -> Val {
     match c {
         '2' => Two,
@@ -283,4 +347,29 @@ pub fn char_to_val(c: char) -> Val {
         'A' => Ace,
         _ => panic!(format!("error getting value: {}", c)),
     }
+}
+
+/// Return a Hand of length cnt from a vector of characters.
+///
+/// Panics is vector of characters is invalid.
+///
+/// ```
+/// use euler_library::cards as cards;
+///
+/// let hand_cs = "TS AC".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
+/// let hand1 = cards::get_hand(2, hand_cs);
+/// let hand2 = cards::Hand {
+///         cards: vec![cards::Card { val: cards::Val::Ace, suit: cards::Suit::Clubs },
+///                     cards::Card { val: cards::Val::Ten, suit: cards::Suit::Spades }],
+/// };
+/// assert_eq!(hand1, hand2);
+/// ```
+pub fn get_hand(cnt: usize, mut cs: Vec<char>) -> Hand {
+    let mut cards: Vec<Card> = Vec::new();
+    for _ in 0..cnt {
+        let suit = char_to_suit(cs.pop().unwrap());
+        let val = char_to_val(cs.pop().unwrap());
+        cards.push(Card { suit: suit, val: val })
+    }
+    Hand { cards: cards }
 }

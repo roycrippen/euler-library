@@ -22,5 +22,4 @@ How to use in your crate:
 .. code:: rust
 
     extern crate euler_library;
-
-    use euler_library::common as eu;
+    

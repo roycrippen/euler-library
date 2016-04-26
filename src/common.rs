@@ -15,8 +15,7 @@
 //!
 //! let res = [[1, 1], [1, 2], [1, 3], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]];
 //! assert_eq!(eu::perms_with_reps(2, &vec![1, 2, 3]), res);
-//!
-//!
+//! ```
 
 use std::str;
 use std::str::FromStr;
@@ -31,7 +30,6 @@ use std::iter::{Repeat, Take};
 ///
 /// assert_eq!(eu::divisor_sum(10), 8);
 /// ```
-///
 pub fn divisor_sum(n: usize) -> usize {
     match n {
         0 | 1 => 0,
@@ -149,7 +147,13 @@ pub fn to_digits(mut n: usize) -> Vec<usize> {
     res
 }
 
-///Returns a usize number from vector xs of usize digits.
+/// Returns a usize number from vector xs of usize digits.
+///
+/// ```
+/// use euler_library::common as eu;
+///
+/// assert_eq!(eu::from_digits(&vec![1,2,3]), 123);
+/// ```
 pub fn from_digits(xs: &[usize]) -> usize {
     let mut res = 0;
     for elt in xs {
@@ -200,14 +204,25 @@ pub fn factorial(n: usize) -> usize { (1..n + 1).fold(1, |p, n| p * n) }
 /// assert_eq!(eu::perms_with_reps(2, &vec![1,2]), [[1,1], [1,2], [2,1], [2,2]]);
 ///
 /// ```
-pub fn perms_with_reps<T>(k: usize, xs: &Vec<T>) -> Vec<Vec<T>>
+pub fn perms_with_reps<T>(k: usize, xs: &[T]) -> Vec<Vec<T>>
     where T: Clone
 {
-    cartesian_product(&replicate(k, xs.clone()).collect())
+    let vec = replicate(k, xs.clone().to_vec()).collect();
+    cartesian_product(&vec)
 }
 
 
 /// Returns and iterator of length n of repeated values of elt
+///
+/// ```
+/// use euler_library::common as eu;
+///
+/// let repeated = eu::replicate(2, vec![1, 2, 3]);
+/// assert_eq!(repeated.collect::<Vec<_>>(), [[1, 2, 3], [1, 2, 3]]);
+///
+/// let repeated = eu::replicate(3, "abc").collect::<String>();
+/// assert_eq!(repeated, "abcabcabc");
+/// ```
 pub fn replicate<T>(n: usize, elt: T) -> Take<Repeat<T>>
     where T: Clone
 {
@@ -254,6 +269,17 @@ pub fn cartesian_product<T: Clone>(lists: &Vec<Vec<T>>) -> Vec<Vec<T>> {
 /// Returns ys concatenated to xs, ie xs `cons` ys
 ///
 /// Just a convenience wrapper around extend
+///
+/// ```
+/// use euler_library::common as eu;
+///
+/// let lists = vec![vec![1, 2], vec![3, 4]];
+/// let new = vec![5, 6];
+/// let result = lists.iter()
+///                   .map(|list| eu::cons(&list, &new))
+///                   .collect::<Vec<_>>();
+/// assert_eq!(result, [[1, 2, 5, 6], [3, 4, 5, 6]]);
+/// ```
 pub fn cons<T>(xs: &Vec<T>, ys: &Vec<T>) -> Vec<T>
     where T: Clone
 {
@@ -265,6 +291,16 @@ pub fn cons<T>(xs: &Vec<T>, ys: &Vec<T>) -> Vec<T>
 /// Returns y pushed into xs, ie xs.push(y)
 ///
 /// Just a convenience wrapper around push
+///
+/// ```
+/// use euler_library::common as eu;
+///
+/// let lists = vec![vec![1, 2], vec![3, 4]];
+/// let result = lists.iter()
+///                   .map(|list| eu::push(&list, 5))
+///                   .collect::<Vec<_>>();
+/// assert_eq!(result, [[1, 2, 5], [3, 4, 5]]);
+/// ```
 pub fn push<T>(xs: &Vec<T>, y: T) -> Vec<T>
     where T: Clone
 {
@@ -396,7 +432,6 @@ pub fn sqrt_terms(n: usize) -> Option<(usize, Vec<usize>)> {
 /// assert_eq!(eu::continued_fraction(a0, ts), (154451, 42837));
 ///
 /// ```
-///
 pub fn continued_fraction(a0: usize, mut xs: Vec<usize>) -> (usize, usize) {
     fn go(n: usize, d: usize, mut xs: Vec<usize>) -> (usize, usize) {
         if xs.is_empty() {
@@ -466,7 +501,6 @@ pub fn phis(d: usize) -> Vec<usize> {
     phi
 }
 
-// running total of a vector:
 /// Returns vector of the running total of xs.
 ///
 /// ```
