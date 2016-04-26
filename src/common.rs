@@ -203,10 +203,9 @@ pub fn factorial(n: usize) -> usize { (1..n + 1).fold(1, |p, n| p * n) }
 pub fn perms_with_reps<T>(k: usize, xs: &[T]) -> Vec<Vec<T>>
     where T: Clone
 {
-    let vec = replicate(k, xs.to_vec()).collect();
+    let vec = replicate(k, xs.to_vec()).collect::<Vec<_>>();
     cartesian_product(&vec)
 }
-
 
 /// Returns and iterator of length n of repeated values of elt
 ///
@@ -236,8 +235,7 @@ pub fn replicate<T>(n: usize, elt: T) -> Take<Repeat<T>>
 /// assert_eq!(eu::cartesian_product(&xss), [[1, 3], [1, 4], [2, 3], [2, 4]]);
 ///
 /// ```
-// #[allow(ptr_arg)]
-pub fn cartesian_product<T: Clone>(lists: &Vec<Vec<T>>) -> Vec<Vec<T>> {
+pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
     fn partial_cartesian<T: Clone>(a: Vec<Vec<T>>, b: &[T]) -> Vec<Vec<T>> {
         a.into_iter()
          .flat_map(|xs| {
@@ -251,12 +249,12 @@ pub fn cartesian_product<T: Clone>(lists: &Vec<Vec<T>>) -> Vec<Vec<T>> {
 
     match lists.split_first() {
         Some((first, rest)) => {
-            let init = first.iter()
-                            .cloned()
-                            .map(|n| vec![n])
+            let init = first.into_iter()
+                            .clone()
+                            .map(|n| vec![n.clone()])
                             .collect::<Vec<Vec<T>>>();
             rest.iter()
-                .cloned()
+                .clone()
                 .fold(init, |vec, list| partial_cartesian(vec, &list))
         }
         None => vec![],
@@ -277,11 +275,10 @@ pub fn cartesian_product<T: Clone>(lists: &Vec<Vec<T>>) -> Vec<Vec<T>> {
 ///                   .collect::<Vec<_>>();
 /// assert_eq!(result, [[1, 2, 5, 6], [3, 4, 5, 6]]);
 /// ```
-// #[allow(ptr_arg)]
-pub fn cons<T>(xs: &Vec<T>, ys: &Vec<T>) -> Vec<T>
+pub fn cons<T>(xs: &[T], ys: &[T]) -> Vec<T>
     where T: Clone
 {
-    let mut res = xs.clone();
+    let mut res = xs.to_vec();
     res.extend(ys.iter().cloned());
     res
 }
@@ -299,11 +296,10 @@ pub fn cons<T>(xs: &Vec<T>, ys: &Vec<T>) -> Vec<T>
 ///                   .collect::<Vec<_>>();
 /// assert_eq!(result, [[1, 2, 5], [3, 4, 5]]);
 /// ```
-// #[allow(ptr_arg)]
-pub fn push<T>(xs: &Vec<T>, y: T) -> Vec<T>
+pub fn push<T>(xs: &[T], y: T) -> Vec<T>
     where T: Clone
 {
-    let mut res = xs.clone();
+    let mut res = xs.to_vec();
     res.push(y);
     res
 
