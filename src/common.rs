@@ -1,7 +1,3 @@
-// #![feature(plugin)]
-//
-// #![plugin(clippy)]
-
 //! Common functions used in solving Project Euler problems.
 //!
 //!
@@ -47,7 +43,7 @@ pub fn divisor_sum(n: usize) -> usize {
     }
 }
 
-/// Returns a vector containing divisor_sum(i) for i from 0 to n.
+/// Returns a vector containing `divisor_sum`(i) for i from 0 to n.
 ///
 /// ```
 /// use euler_library::common as eu;
@@ -184,7 +180,7 @@ pub fn is_palindrome<T: ToString>(n: T) -> bool {
 
 /// Returns factorial of n for numbers less than 21.
 ///
-/// Panics for n above 20.  Big factorial implemented in eu_big crate.
+/// Panics for n above 20.  Big factorial implemented in `eu_big` crate.
 ///
 /// ```
 /// use euler_library::common as eu;
@@ -207,7 +203,7 @@ pub fn factorial(n: usize) -> usize { (1..n + 1).fold(1, |p, n| p * n) }
 pub fn perms_with_reps<T>(k: usize, xs: &[T]) -> Vec<Vec<T>>
     where T: Clone
 {
-    let vec = replicate(k, xs.clone().to_vec()).collect();
+    let vec = replicate(k, xs.to_vec()).collect();
     cartesian_product(&vec)
 }
 
@@ -240,6 +236,7 @@ pub fn replicate<T>(n: usize, elt: T) -> Take<Repeat<T>>
 /// assert_eq!(eu::cartesian_product(&xss), [[1, 3], [1, 4], [2, 3], [2, 4]]);
 ///
 /// ```
+// #[allow(ptr_arg)]
 pub fn cartesian_product<T: Clone>(lists: &Vec<Vec<T>>) -> Vec<Vec<T>> {
     fn partial_cartesian<T: Clone>(a: Vec<Vec<T>>, b: &[T]) -> Vec<Vec<T>> {
         a.into_iter()
@@ -280,6 +277,7 @@ pub fn cartesian_product<T: Clone>(lists: &Vec<Vec<T>>) -> Vec<Vec<T>> {
 ///                   .collect::<Vec<_>>();
 /// assert_eq!(result, [[1, 2, 5, 6], [3, 4, 5, 6]]);
 /// ```
+// #[allow(ptr_arg)]
 pub fn cons<T>(xs: &Vec<T>, ys: &Vec<T>) -> Vec<T>
     where T: Clone
 {
@@ -301,6 +299,7 @@ pub fn cons<T>(xs: &Vec<T>, ys: &Vec<T>) -> Vec<T>
 ///                   .collect::<Vec<_>>();
 /// assert_eq!(result, [[1, 2, 5], [3, 4, 5]]);
 /// ```
+// #[allow(ptr_arg)]
 pub fn push<T>(xs: &Vec<T>, y: T) -> Vec<T>
     where T: Clone
 {
@@ -345,7 +344,7 @@ pub fn perms_without_reps_recur<T>(k: usize, xs: &[T]) -> Vec<Vec<T>>
 
 /// Returns k nested 'loops' from xs, ordered.
 ///
-/// k_nested_recur(3, &[1,2]) sudo code same as:
+/// `k_nested_recur`(3, &[1,2]) sudo code same as:
 ///
 ///  for (i,vi) 0..2 { for (j,vj) in i..2 { for (k,vk) in j..2 { list.push(vi, vj, vk) } } }
 ///
@@ -413,7 +412,7 @@ pub fn sqrt_terms(n: usize) -> Option<(usize, Vec<usize>)> {
     Some((a0, xs))
 }
 
-/// Return (numerator, denominator) after evaluating continued_fraction.
+/// Return (numerator, denominator) after evaluating `continued_fraction`.
 ///
 /// Form of continued fraction: (a0, [t1, t2, t3, ....])
 ///
@@ -430,7 +429,6 @@ pub fn sqrt_terms(n: usize) -> Option<(usize, Vec<usize>)> {
 /// assert_eq!(ts, [1, 1, 1, 1, 6, 1, 1, 1, 1, 6, 1, 1, 1, 1, 6]);
 ///
 /// assert_eq!(eu::continued_fraction(a0, ts), (154451, 42837));
-///
 /// ```
 pub fn continued_fraction(a0: usize, mut xs: Vec<usize>) -> (usize, usize) {
     fn go(n: usize, d: usize, mut xs: Vec<usize>) -> (usize, usize) {

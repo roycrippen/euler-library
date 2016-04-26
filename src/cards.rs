@@ -82,7 +82,7 @@ impl Hand {
     /// ```
     pub fn show(&self) -> String {
         let mut str = "[".to_string();
-        for x in self.cards.iter() {
+        for x in &self.cards {
             str.push_str(&format!("{}, ", x))
         }
         str.pop();
