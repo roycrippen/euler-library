@@ -1,5 +1,5 @@
 [package]
-name = "euler_library"
+name = "euler-library"
 version = "0.1.0"
 authors = ["roycrippen <roycrippen@gmail.com>"]
 
