@@ -1,4 +1,4 @@
-//!   Library used in solving Project Euler problems needing `BigInt` or `BigUint`. (https://projecteuler.net)
+//!   Library used in solving Project Euler problems needing `BigInt` or `BigUint`.
 //!
 //!
 //! # Example
