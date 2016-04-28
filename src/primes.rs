@@ -1,17 +1,13 @@
-// #![feature(plugin)]
-//
-// #![plugin(clippy)]
-
 //! Functions involving primes without dependencies.
 //!
 //!
 //! # Examples
 //!
 //! ```
-//! use euler_library::primes as primes;
+//! use euler_library::primes as eu_primes;
 //!
-//! assert_eq!(primes::prime_factors(84), [2, 2, 3, 7]);
-//! assert_eq!(primes::prime_factors_unique(84), [2, 3, 7]);
+//! assert_eq!(eu_primes::prime_factors(84), [2, 2, 3, 7]);
+//! assert_eq!(eu_primes::prime_factors_unique(84), [2, 3, 7]);
 //!
 //! ```
 
@@ -19,10 +15,10 @@
 /// Returns a vector of the prime factors n.
 ///
 /// ```
-/// use euler_library::primes as primes;
+/// use euler_library::primes as eu_primes;
 ///
-/// assert_eq!(primes::prime_factors(342), [2, 3, 3, 19]);
-/// assert_eq!(primes::prime_factors(123), [3, 41]);
+/// assert_eq!(eu_primes::prime_factors(342), [2, 3, 3, 19]);
+/// assert_eq!(eu_primes::prime_factors(123), [3, 41]);
 /// ```
 ///
 pub fn prime_factors(mut n: usize) -> Vec<usize> {
@@ -41,10 +37,10 @@ pub fn prime_factors(mut n: usize) -> Vec<usize> {
 /// Returns a vector of the unique prime factors n.
 ///
 /// ```
-/// use euler_library::primes as primes;
+/// use euler_library::primes as eu_primes;
 ///
-/// assert_eq!(primes::prime_factors_unique(342), [2, 3, 19]);
-/// assert_eq!(primes::prime_factors_unique(123), [3, 41]);
+/// assert_eq!(eu_primes::prime_factors_unique(342), [2, 3, 19]);
+/// assert_eq!(eu_primes::prime_factors_unique(123), [3, 41]);
 /// ```
 ///
 pub fn prime_factors_unique(n: usize) -> Vec<usize> {
@@ -57,10 +53,10 @@ pub fn prime_factors_unique(n: usize) -> Vec<usize> {
 /// Returns the sum of unique prime factors of n.
 ///
 /// ```
-/// use euler_library::primes as primes;
+/// use euler_library::primes as eu_primes;
 ///
-/// assert_eq!(primes::sopf(342), 24);
-/// assert_eq!(primes::sopf(123), 44);
+/// assert_eq!(eu_primes::sopf(342), 24);
+/// assert_eq!(eu_primes::sopf(123), 44);
 /// ```
 ///
 pub fn sopf(n: usize) -> usize { prime_factors_unique(n).iter().fold(0, |acc, x| acc + x) }
@@ -69,12 +65,12 @@ pub fn sopf(n: usize) -> usize { prime_factors_unique(n).iter().fold(0, |acc, x|
 /// Return a vector of the count of unique prime factors of i in 0..n.
 ///
 /// ```
-/// use euler_library::primes as primes;
+/// use euler_library::primes as eu_primes;
 ///
-/// assert_eq!(primes::prime_factor_cnt(10), [0, 0, 1, 1, 1, 1, 2, 1, 1, 1]);
+/// assert_eq!(eu_primes::prime_factor_cnt(10), [0, 0, 1, 1, 1, 1, 2, 1, 1, 1]);
 ///
 /// let prime_factor_cnt_90_to_99 =
-///     primes::prime_factor_cnt(100).into_iter().skip(90).take(10).collect::<Vec<_>>();
+///     eu_primes::prime_factor_cnt(100).into_iter().skip(90).take(10).collect::<Vec<_>>();
 /// assert_eq!(prime_factor_cnt_90_to_99, [3, 2, 2, 2, 2, 2, 2, 1, 2, 2]);
 /// ```
 ///

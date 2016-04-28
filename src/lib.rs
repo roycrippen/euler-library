@@ -1,5 +1,5 @@
-// #![feature(plugin)]
-// #![plugin(clippy)]
+#![feature(plugin)]
+#![plugin(clippy)]
 
 //!  Several libraries used in solving Project Euler problems (https://projecteuler.net)
 //!
@@ -17,6 +17,7 @@
 //! extern crate euler_library;
 //! ```
 //!
+pub mod big;
 pub mod cards;
 pub mod common;
 pub mod primes;

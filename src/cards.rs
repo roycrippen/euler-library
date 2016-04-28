@@ -1,21 +1,17 @@
-// #![feature(plugin)]
-//
-// #![plugin(clippy)]
-
 //! Playing card library for poker to rank hands.
 //!
 //!
 //! # Examples
 //!
 //! ```
-//! use euler_library::cards as cards;
+//! use euler_library::cards as eu_cards;
 //!
 //! let hand_cs = "AD AS JH JS 2C".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
-//! let hand_loser = cards::get_hand(5, hand_cs);
+//! let hand_loser = eu_cards::get_hand(5, hand_cs);
 //! assert_eq!(hand_loser.show(), "[(Two, Clubs), (Jack, Spades), (Jack, Hearts), (Ace, Spades), (Ace, Diamonds)]");
 //!
 //! let hand_cs = "3D 3H 3C 2S 2D".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
-//! let hand_winner = cards::get_hand(5, hand_cs);
+//! let hand_winner = eu_cards::get_hand(5, hand_cs);
 //! assert_eq!(hand_winner.show(), "[(Two, Diamonds), (Two, Spades), (Three, Clubs), (Three, Hearts), (Three, Diamonds)]");
 //!
 //! assert!(hand_winner.get_rank() > hand_loser.get_rank());
@@ -74,10 +70,10 @@ impl Hand {
     /// Return a String representation of hand.
     ///
     /// ```
-    /// use euler_library::cards as cards;
+    /// use euler_library::cards as eu_cards;
     ///
     /// let hand_cs = "AD AS JH JS 2C".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
-    /// let hand = cards::get_hand(5, hand_cs);
+    /// let hand = eu_cards::get_hand(5, hand_cs);
     /// assert_eq!(hand.show(), "[(Two, Clubs), (Jack, Spades), (Jack, Hearts), (Ace, Spades), (Ace, Diamonds)]");
     /// ```
     pub fn show(&self) -> String {
@@ -279,15 +275,15 @@ impl Hand {
 /// Returns a new line seperated String of hands for printing.
 ///
 /// ```
-/// use euler_library::cards as cards;
+/// use euler_library::cards as eu_cards;
 ///
 /// let hand_cs = "AD AS JH JS 2C".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
-/// let hand_loser = cards::get_hand(5, hand_cs);
+/// let hand_loser = eu_cards::get_hand(5, hand_cs);
 ///
 /// let hand_cs = "3D 3H 3C 2S 2D".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
-/// let hand_winner = cards::get_hand(5, hand_cs);
+/// let hand_winner = eu_cards::get_hand(5, hand_cs);
 ///
-/// assert_eq!(cards::show_grp(vec![hand_loser, hand_winner]),
+/// assert_eq!(eu_cards::show_grp(vec![hand_loser, hand_winner]),
 ///        "[(Two, Clubs), (Jack, Spades), (Jack, Hearts), (Ace, Spades), (Ace, Diamonds)]\n[(Two, Diamonds), (Two, Spades), (Three, Clubs), (Three, Hearts), (Three, Diamonds)]\n");
 ///
 /// ```
@@ -304,9 +300,9 @@ pub fn show_grp(gss: Vec<Hand>) -> String {
 /// Panics if character is invalid.
 ///
 /// ```
-/// use euler_library::cards as cards;
+/// use euler_library::cards as eu_cards;
 ///
-/// assert_eq!(cards::char_to_suit('H'), cards::Suit::Hearts);
+/// assert_eq!(eu_cards::char_to_suit('H'), eu_cards::Suit::Hearts);
 ///
 /// ```
 pub fn char_to_suit(c: char) -> Suit {
@@ -324,10 +320,10 @@ pub fn char_to_suit(c: char) -> Suit {
 /// Panics if character is invalid.
 ///
 /// ```
-/// use euler_library::cards as cards;
+/// use euler_library::cards as eu_cards;
 ///
-/// assert_eq!(cards::char_to_val('A'), cards::Val::Ace);
-/// assert_eq!(cards::char_to_val('9'), cards::Val::Nine);
+/// assert_eq!(eu_cards::char_to_val('A'), eu_cards::Val::Ace);
+/// assert_eq!(eu_cards::char_to_val('9'), eu_cards::Val::Nine);
 ///
 /// ```
 pub fn char_to_val(c: char) -> Val {
@@ -354,13 +350,13 @@ pub fn char_to_val(c: char) -> Val {
 /// Panics is vector of characters is invalid.
 ///
 /// ```
-/// use euler_library::cards as cards;
+/// use euler_library::cards as eu_cards;
 ///
 /// let hand_cs = "TS AC".chars().filter(|&x| x != ' ' && x != '\n').collect::<Vec<char>>();
-/// let hand1 = cards::get_hand(2, hand_cs);
-/// let hand2 = cards::Hand {
-///         cards: vec![cards::Card { val: cards::Val::Ace, suit: cards::Suit::Clubs },
-///                     cards::Card { val: cards::Val::Ten, suit: cards::Suit::Spades }],
+/// let hand1 = eu_cards::get_hand(2, hand_cs);
+/// let hand2 = eu_cards::Hand {
+///         cards: vec![eu_cards::Card { val: eu_cards::Val::Ace, suit: eu_cards::Suit::Clubs },
+///                     eu_cards::Card { val: eu_cards::Val::Ten, suit: eu_cards::Suit::Spades }],
 /// };
 /// assert_eq!(hand1, hand2);
 /// ```
