@@ -1,5 +1,5 @@
-#![feature(plugin)]
-#![plugin(clippy)]
+// #![feature(plugin)]
+// #![plugin(clippy)]
 
 //!  Several libraries used in solving Project Euler problems (https://projecteuler.net)
 //!

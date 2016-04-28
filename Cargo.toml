@@ -5,4 +5,4 @@ authors = ["roycrippen <roycrippen@gmail.com>"]
 
 [dependencies]
 num = "*"
-clippy = "*"
+# clippy = "*"
