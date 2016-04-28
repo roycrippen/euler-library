@@ -7,9 +7,7 @@ Please read the `API documentation here`__
 
 __ http://roycrippen.github.io/euler_library/euler_library/index.html
 
-|build_status|_ .. image:: https://clippy.bashy.io/github/roycrippen/euler_library/master/badge.svg
-
-:target: https://clippy.bashy.io/github/roycrippen/euler_library/master/log
+|build_status|_ 
 
 .. |build_status| image:: https://travis-ci.org/roycrippen/euler_library.svg?branch=master
 .. _build_status: https://travis-ci.org/roycrippen/euler_library
