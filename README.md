@@ -15,6 +15,6 @@ How to use with cargo::
 
 How to use in your crate:
 
-```
+```rust
     extern crate euler_library;
 ```    
