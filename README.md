@@ -9,12 +9,12 @@ Please read the [API documentation here](http://roycrippen.github.io/euler_libra
 How to use with cargo::
 
 ```
-    [dependencies]
-    euler_library = { git = "https://github.com/roycrippen/euler_library" }
+[dependencies.euler_library]
+git = "https://github.com/roycrippen/euler_library"
 ```
 
 How to use in your crate:
 
 ```rust
-    extern crate euler_library;
+extern crate euler_library;
 ```    
