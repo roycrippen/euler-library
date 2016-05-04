@@ -8,8 +8,8 @@
 //! Just add the following to your [`Cargo.toml`](http://crates.io/):
 //!
 //! ```toml
-//! [dependencies]
-//! euler_library = { git = "https://github.com/roycrippen/euler_library" }
+//! [dependencies.euler_library]
+//! git = "https://github.com/roycrippen/euler_library"
 //! ```
 //! And add this to your root crate.
 //!
