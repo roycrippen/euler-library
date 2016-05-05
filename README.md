@@ -1,4 +1,4 @@
-# Euler Library
+# euler_library
 
 Rust library of common functions used to help solve [Project Euler](https://projecteuler.net/) problems.
 
