@@ -106,7 +106,9 @@ pub fn sum_of_digits(s: String) -> usize {
 ///
 /// assert_eq!(eu::to_bytes(123), [49, 50, 51]);
 /// ```
-pub fn to_bytes<T: ToString>(n: T) -> Vec<u8> { n.to_string().into_bytes() }
+pub fn to_bytes<T: ToString>(n: T) -> Vec<u8> {
+    n.to_string().into_bytes()
+}
 
 
 /// Returns Result from attempting to parses a Vec of u8.
@@ -188,7 +190,9 @@ pub fn is_palindrome<T: ToString>(n: T) -> bool {
 /// assert_eq!(eu::factorial(15), 1307674368000);
 ///
 /// ```
-pub fn factorial(n: usize) -> usize { (1..n + 1).fold(1, |p, n| p * n) }
+pub fn factorial(n: usize) -> usize {
+    (1..n + 1).fold(1, |p, n| p * n)
+}
 
 /// Returns permutations k chosen from xs, odered, repetition allowed.
 ///
@@ -261,9 +265,9 @@ pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
     }
 }
 
-/// Returns ys concatenated to xs, ie xs `cons` ys
+/// Returns ys concatenated to xs, ie xs `concat` ys
 ///
-/// Just a convenience wrapper around extend
+/// Just a convenience wrapper to append lists
 ///
 /// ```
 /// use euler_library::common as eu;
@@ -271,15 +275,34 @@ pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
 /// let lists = vec![vec![1, 2], vec![3, 4]];
 /// let new = vec![5, 6];
 /// let result = lists.iter()
-///                   .map(|list| eu::cons(&list, &new))
+///                   .map(|list| eu::concat(&list, &new))
 ///                   .collect::<Vec<_>>();
 /// assert_eq!(result, [[1, 2, 5, 6], [3, 4, 5, 6]]);
 /// ```
-pub fn cons<T>(xs: &[T], ys: &[T]) -> Vec<T>
-    where T: Clone
-{
-    let mut res = xs.to_vec();
-    res.extend(ys.iter().cloned());
+pub fn concat<T: Clone>(xs: &[T], ys: &[T]) -> Vec<T> {
+    ys.iter()
+      .fold(xs.to_vec(), |mut acc, y| {
+          acc.push(y.clone());
+          acc
+      })
+}
+
+/// Returns x pre-pended to ys, ie x `cons` ys
+///
+/// Just a convenience wrapper to pre-pend a list
+///
+/// ```
+/// use euler_library::common as eu;
+///
+/// let lists = vec![vec![1, 2], vec![3, 4]];
+/// let result = lists.iter()
+///                   .map(|list| eu::cons(5, &list))
+///                   .collect::<Vec<_>>();
+/// assert_eq!(result, [[5, 1, 2], [5, 3, 4]]);
+/// ```
+pub fn cons<T: Clone>(x: T, ys: &[T]) -> Vec<T> {
+    let mut res = ys.to_vec();
+    res.insert(0, x);
     res
 }
 
