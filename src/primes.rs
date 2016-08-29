@@ -59,7 +59,9 @@ pub fn prime_factors_unique(n: usize) -> Vec<usize> {
 /// assert_eq!(eu_primes::sopf(123), 44);
 /// ```
 ///
-pub fn sopf(n: usize) -> usize { prime_factors_unique(n).iter().fold(0, |acc, x| acc + x) }
+pub fn sopf(n: usize) -> usize {
+    prime_factors_unique(n).iter().fold(0, |acc, x| acc + x)
+}
 
 
 /// Return a vector of the count of unique prime factors of i in 0..n.

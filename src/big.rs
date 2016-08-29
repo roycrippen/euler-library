@@ -106,21 +106,21 @@ pub fn continued_fraction(a0: usize, mut xs: Vec<usize>) -> (BigUint, BigUint) {
 /// ```
 pub fn integer_partitions(n: usize) -> Vec<BigInt> {
     let k = (1..n)
-                .flat_map(|i| vec![i * (3 * i - 1) / 2, i * (3 * i - 1) / 2 + i])
-                .collect::<Vec<_>>();
+        .flat_map(|i| vec![i * (3 * i - 1) / 2, i * (3 * i - 1) / 2 + i])
+        .collect::<Vec<_>>();
 
     let one: BigInt = One::one();
     let mut p: Vec<BigInt> = vec![one.clone()];
     let sign: Vec<BigInt> = vec![one.clone(), one.clone(), -one.clone(), -one.clone()];
 
     for i in 1..n + 1 {
-        let mut t: BigInt = Zero::zero();
+        let mut temp: BigInt = Zero::zero();
         let mut j = 0;
         while k[j] <= i {
-            t = t + (p[i - k[j]].clone()) * sign[j % 4].clone();
+            temp = temp + (p[i - k[j]].clone()) * sign[j % 4].clone();
             j += 1;
         }
-        p.push(t)
+        p.push(temp)
     }
     p
 }

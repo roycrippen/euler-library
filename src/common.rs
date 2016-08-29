@@ -13,11 +13,11 @@
 //! assert_eq!(eu::perms_with_reps(2, &vec![1, 2, 3]), res);
 //! ```
 
-use std::str;
-use std::str::FromStr;
 use std::fmt::Debug;
 use std::iter;
 use std::iter::{Repeat, Take};
+use std::str;
+use std::str::FromStr;
 
 /// Returns the sum of the proper divisors of n (not including n).
 ///
@@ -125,7 +125,7 @@ pub fn from_bytes<T>(vec: &[u8]) -> Result<T, T::Err>
     where T: FromStr,
           <T as FromStr>::Err: Debug
 {
-    str::from_utf8(&vec).unwrap().parse::<_>()
+    str::from_utf8(vec).unwrap().parse::<_>()
 }
 
 /// Returns usize n as a vector of its usize digits.
@@ -242,24 +242,24 @@ pub fn replicate<T>(n: usize, elt: T) -> Take<Repeat<T>>
 pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
     fn partial_cartesian<T: Clone>(a: Vec<Vec<T>>, b: &[T]) -> Vec<Vec<T>> {
         a.into_iter()
-         .flat_map(|xs| {
-             b.iter()
-              .cloned()
-              .map(|y| push(&xs, y))
-              .collect::<Vec<_>>()
-         })
-         .collect()
+            .flat_map(|xs| {
+                b.iter()
+                    .cloned()
+                    .map(|y| push(&xs, y))
+                    .collect::<Vec<_>>()
+            })
+            .collect()
     }
 
     match lists.split_first() {
         Some((first, rest)) => {
             let init = first.into_iter()
-                            .clone()
-                            .map(|n| vec![n.clone()])
-                            .collect::<Vec<Vec<T>>>();
+                .clone()
+                .map(|n| vec![n.clone()])
+                .collect::<Vec<Vec<T>>>();
             rest.iter()
                 .clone()
-                .fold(init, |vec, list| partial_cartesian(vec, &list))
+                .fold(init, |vec, list| partial_cartesian(vec, list))
         }
         None => vec![],
     }
@@ -281,10 +281,10 @@ pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
 /// ```
 pub fn concat<T: Clone>(xs: &[T], ys: &[T]) -> Vec<T> {
     ys.iter()
-      .fold(xs.to_vec(), |mut acc, y| {
-          acc.push(y.clone());
-          acc
-      })
+        .fold(xs.to_vec(), |mut acc, y| {
+            acc.push(y.clone());
+            acc
+        })
 }
 
 /// Returns x pre-pended to ys, ie x `cons` ys
@@ -499,18 +499,18 @@ pub fn phis(d: usize) -> Vec<usize> {
     while idx < n {
         if phi[idx] == 0 {
             phi[idx] = idx - 1;
-            let mut j = 2;
-            while j * idx < n {
-                if phi[j] != 0 {
-                    let mut q = j;
+            let mut jj = 2;
+            while jj * idx < n {
+                if phi[jj] != 0 {
+                    let mut q = jj;
                     let mut f = idx - 1;
                     while q % idx == 0 {
                         f *= idx;
                         q /= idx;
                     }
-                    phi[idx * j] = f * phi[q];
+                    phi[idx * jj] = f * phi[q];
                 }
-                j += 1
+                jj += 1
             }
         }
         idx += 1;
@@ -528,9 +528,9 @@ pub fn phis(d: usize) -> Vec<usize> {
 /// ```
 pub fn accumulate(xs: &[usize]) -> Vec<usize> {
     xs.into_iter()
-      .scan(0, |state, x| {
-          *state = *state + x;
-          Some(*state)
-      })
-      .collect()
+        .scan(0, |state, x| {
+            *state = *state + x;
+            Some(*state)
+        })
+        .collect()
 }

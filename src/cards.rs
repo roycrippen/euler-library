@@ -37,7 +37,9 @@ pub struct Card {
 }
 
 impl fmt::Display for Card {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result { write!(f, "({:?}, {:?})", self.val, self.suit) }
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({:?}, {:?})", self.val, self.suit)
+    }
 }
 
 impl Card {
@@ -83,7 +85,7 @@ impl Hand {
         }
         str.pop();
         str.pop();
-        str = str + &"]";
+        str = str + "]";
         str
     }
     fn is_flush(&self) -> bool {
