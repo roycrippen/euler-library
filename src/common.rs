@@ -245,7 +245,11 @@ pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
             .flat_map(|xs| {
                 b.iter()
                     .cloned()
-                    .map(|y| push(&xs, y))
+                    .map(|y| {
+                        let mut temp = xs.clone();
+                        temp.push(y);
+                        temp
+                    })
                     .collect::<Vec<_>>()
             })
             .collect()
@@ -263,69 +267,6 @@ pub fn cartesian_product<T: Clone>(lists: &[Vec<T>]) -> Vec<Vec<T>> {
         }
         None => vec![],
     }
-}
-
-/// Returns ys concatenated to xs, ie xs `concat` ys
-///
-/// Just a convenience wrapper to append lists
-///
-/// ```
-/// use euler_library::common as eu;
-///
-/// let lists = vec![vec![1, 2], vec![3, 4]];
-/// let new = vec![5, 6];
-/// let result = lists.iter()
-///                   .map(|list| eu::concat(&list, &new))
-///                   .collect::<Vec<_>>();
-/// assert_eq!(result, [[1, 2, 5, 6], [3, 4, 5, 6]]);
-/// ```
-pub fn concat<T: Clone>(xs: &[T], ys: &[T]) -> Vec<T> {
-    ys.iter()
-        .fold(xs.to_vec(), |mut acc, y| {
-            acc.push(y.clone());
-            acc
-        })
-}
-
-/// Returns x pre-pended to ys, ie x `cons` ys
-///
-/// Just a convenience wrapper to pre-pend a list
-///
-/// ```
-/// use euler_library::common as eu;
-///
-/// let lists = vec![vec![1, 2], vec![3, 4]];
-/// let result = lists.iter()
-///                   .map(|list| eu::cons(5, &list))
-///                   .collect::<Vec<_>>();
-/// assert_eq!(result, [[5, 1, 2], [5, 3, 4]]);
-/// ```
-pub fn cons<T: Clone>(x: T, ys: &[T]) -> Vec<T> {
-    let mut res = ys.to_vec();
-    res.insert(0, x);
-    res
-}
-
-/// Returns y pushed into xs, ie xs.push(y)
-///
-/// Just a convenience wrapper around push
-///
-/// ```
-/// use euler_library::common as eu;
-///
-/// let lists = vec![vec![1, 2], vec![3, 4]];
-/// let result = lists.iter()
-///                   .map(|list| eu::push(&list, 5))
-///                   .collect::<Vec<_>>();
-/// assert_eq!(result, [[1, 2, 5], [3, 4, 5]]);
-/// ```
-pub fn push<T>(xs: &[T], y: T) -> Vec<T>
-    where T: Clone
-{
-    let mut res = xs.to_vec();
-    res.push(y);
-    res
-
 }
 
 /// Returns permutations k chosen from xs, odered, no repetition.
