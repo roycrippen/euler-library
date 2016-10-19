@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `get_hand` fn in crate `euler_library`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, get_hand">
+
+    <title>euler_library::cards::get_hand - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../index.html'>euler_library</a>::<wbr><a href='index.html'>cards</a></p><script>window.sidebarCurrent = {name: 'get_hand', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content fn">
+<h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>euler_library</a>::<wbr><a href='index.html'>cards</a>::<wbr><a class='fn' href=''>get_hand</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-400' class='srclink' href='../../src/euler_library/src/cards.rs.html#365-373' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn get_hand(cnt: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>, cs: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.char.html'>char</a>&gt;) -&gt; <a class='struct' href='../../euler_library/cards/struct.Hand.html' title='euler_library::cards::Hand'>Hand</a></pre><div class='docblock'><p>Return a Hand of length cnt from a vector of characters.</p>
+
+<p>Panics is vector of characters is invalid.</p>
+
+<pre class='rust rust-example-rendered'>
+<span class='kw'>use</span> <span class='ident'>euler_library</span>::<span class='ident'>cards</span> <span class='kw'>as</span> <span class='ident'>eu_cards</span>;
+
+<span class='kw'>let</span> <span class='ident'>hand_cs</span> <span class='op'>=</span> <span class='string'>&quot;TS AC&quot;</span>.<span class='ident'>chars</span>().<span class='ident'>filter</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>x</span><span class='op'>|</span> <span class='ident'>x</span> <span class='op'>!=</span> <span class='string'>&#39; &#39;</span> <span class='op'>&amp;&amp;</span> <span class='ident'>x</span> <span class='op'>!=</span> <span class='string'>&#39;\n&#39;</span>).<span class='ident'>collect</span>::<span class='op'>&lt;</span><span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>char</span><span class='op'>&gt;&gt;</span>();
+<span class='kw'>let</span> <span class='ident'>hand1</span> <span class='op'>=</span> <span class='ident'>eu_cards</span>::<span class='ident'>get_hand</span>(<span class='number'>2</span>, <span class='ident'>hand_cs</span>);
+<span class='kw'>let</span> <span class='ident'>hand2</span> <span class='op'>=</span> <span class='ident'>eu_cards</span>::<span class='ident'>Hand</span> {
+        <span class='ident'>cards</span>: <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>eu_cards</span>::<span class='ident'>Card</span> { <span class='ident'>val</span>: <span class='ident'>eu_cards</span>::<span class='ident'>Val</span>::<span class='ident'>Ace</span>, <span class='ident'>suit</span>: <span class='ident'>eu_cards</span>::<span class='ident'>Suit</span>::<span class='ident'>Clubs</span> },
+                    <span class='ident'>eu_cards</span>::<span class='ident'>Card</span> { <span class='ident'>val</span>: <span class='ident'>eu_cards</span>::<span class='ident'>Val</span>::<span class='ident'>Ten</span>, <span class='ident'>suit</span>: <span class='ident'>eu_cards</span>::<span class='ident'>Suit</span>::<span class='ident'>Spades</span> }],
+};
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>hand1</span>, <span class='ident'>hand2</span>);</pre>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "euler_library";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["continued_fraction","Return (numerator, denominator) after evaluating `continued_fraction`."],["factorial","Returns n factorial as a `BigUint`."],["integer_partitions","Returns a `BigInt` vec[p(0), p(1)...p(n)] generating partition function"],["precision_sqrt","Returns `BigUnit` square root of usize n to digits precision."]]});

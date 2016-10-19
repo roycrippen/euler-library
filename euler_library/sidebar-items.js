@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["big","Library used in solving Project Euler problems needing `BigInt` or `BigUint`."],["cards","Playing card library for poker to rank hands."],["common","Common functions used in solving Project Euler problems."],["primes","Functions involving primes without dependencies."]]});

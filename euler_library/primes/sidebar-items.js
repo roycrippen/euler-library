@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["prime_factor_cnt","Return a vector of the count of unique prime factors of i in 0..n."],["prime_factors","Returns a vector of the prime factors n."],["prime_factors_unique","Returns a vector of the unique prime factors n."],["sopf","Returns the sum of unique prime factors of n."]]});
